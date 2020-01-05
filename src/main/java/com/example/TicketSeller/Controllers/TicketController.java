@@ -16,8 +16,8 @@ public class TicketController {
     TicketServices ticketServices;
 
     @PostMapping
-    public void addNewTicket(@RequestBody Ticket ticket) {
-        ticketServices.addTicket(ticket);
+    public void addNewTicket(@RequestBody List<Ticket> tickets) {
+        ticketServices.addTicket(tickets);
     }
 
     @GetMapping("/{ticketNo}")

@@ -19,6 +19,7 @@ public class CompanyServices {
     FlightRepo flightRepo;
 
     public void addCompany(Company company) {
+        company.setCompanyName(company.getCompanyName().toLowerCase());
         companyRepo.save(company);
     }
 
@@ -27,6 +28,7 @@ public class CompanyServices {
     }
 
     public Company findCompanyByName(String companyName) {
+        companyName = companyName.toLowerCase();
         return companyRepo.findCompanyByCompanyName(companyName);
     }
 

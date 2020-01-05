@@ -5,6 +5,8 @@ import com.example.TicketSeller.Services.AirportServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/airport")
 @CrossOrigin
@@ -14,8 +16,8 @@ public class AirportController {
     AirportServices airportServices;
 
     @PostMapping
-    public void addNewAirport(@RequestBody Airport newAirport) {
-        airportServices.addAirport(newAirport);
+    public void addNewAirport(@RequestBody List<Airport> newAirports) {
+        airportServices.addAirport(newAirports);
     }
 
     @GetMapping("/{id}")
@@ -26,6 +28,11 @@ public class AirportController {
     @GetMapping("/findByName/{airportName}")
     public Airport findAirportByAirportName(@PathVariable String airportName) {
         return airportServices.findAirportByAirportName(airportName);
+    }
+
+    @GetMapping("/searchByName/{airportName}")
+    public List<Airport> searchAirportByAirportName(@PathVariable String airportName){
+        return  airportServices.searchAirportsByAirportName(airportName);
     }
 
 }

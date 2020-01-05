@@ -24,7 +24,7 @@ public class FlightRoute implements Serializable {
     @Column(name = "flightRoute_id")
     private int id;
 
-    @Column(name ="flightRoute_Code")
+    @Column(name = "flightRoute_Code")
     private String flightRouteCode;
 
     @Column(name = "startPoint")
@@ -33,12 +33,7 @@ public class FlightRoute implements Serializable {
     @Column(name = "endPoint")
     private Airport endPoint;
 
-    @OneToMany
-    @JoinColumn(name = "flightRoute_id" , referencedColumnName = "flightRoute_id")
-    private List<Airport> airports = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "flightRoute_id" , referencedColumnName = "flightRoute_id")
-    private  List<Flight> flights = new ArrayList<>();
+
 
 }

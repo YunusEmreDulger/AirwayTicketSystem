@@ -18,8 +18,10 @@ public class TicketServices {
     @Autowired
     FlightRepo flightRepo;
 
-    public void addTicket(Ticket ticket) {
-        ticketRepo.save(ticket);
+    public void addTicket(List<Ticket> tickets) {
+        for (Ticket ticket : tickets) {
+            ticketRepo.save(tickets);
+        }
     }
 
     public Ticket findTicketByTicketNo(String ticketNo) {

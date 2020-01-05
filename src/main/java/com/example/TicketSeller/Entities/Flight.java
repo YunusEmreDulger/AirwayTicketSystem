@@ -12,7 +12,8 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "flight")
+@Table(name = "flight", uniqueConstraints =
+@UniqueConstraint(columnNames = {"flightCode"}))
 @NoArgsConstructor
 @AllArgsConstructor
 public class Flight implements Serializable, FlightInterface {
@@ -37,9 +38,10 @@ public class Flight implements Serializable, FlightInterface {
     @Column(name = "occupancy")
     private double occupancy;
 
-   /* @OneToMany
-    @JoinColumn(name = "flight_id" , referencedColumnName = "flight_id")
-    private List<Ticket> ticket = new ArrayList<>();*/
+    @ManyToOne
+    @JoinColumn(name = "flightRoute_id", referencedColumnName = "flightRoute_id")
+    private FlightRoute flightRoute;
+
 
 
     @Override
