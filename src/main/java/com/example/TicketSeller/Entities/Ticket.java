@@ -16,7 +16,7 @@ import java.util.Date;
 @UniqueConstraint(columnNames = {"ticketNo"}))
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ticket implements Serializable {
+public class Ticket extends BaseEntity implements Serializable {
 
     //bilet satın alınabilmeli,iptal edilebilmeli, aranabilmeli
 
@@ -35,7 +35,6 @@ public class Ticket implements Serializable {
     @Column(name = "price")
     private double price;
 
-
     @Column(name = "seatNumber")
     private String seatNumber;
 
@@ -50,6 +49,5 @@ public class Ticket implements Serializable {
     @ManyToOne
     @JoinColumn(name = "flight_id", referencedColumnName = "flight_id")
     private Flight flight;
-
 
 }

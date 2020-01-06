@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -16,7 +14,7 @@ import java.util.List;
 @UniqueConstraint(columnNames = {"flightRoute_Code"}))
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlightRoute implements Serializable {
+public class FlightRoute extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flightRoute_generator")
@@ -32,8 +30,6 @@ public class FlightRoute implements Serializable {
 
     @Column(name = "endPoint")
     private Airport endPoint;
-
-
 
 
 }

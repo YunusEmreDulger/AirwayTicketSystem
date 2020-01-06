@@ -1,10 +1,13 @@
 package com.example.TicketSeller.Controllers;
 
+import com.example.TicketSeller.Dto.AirportRequest;
+import com.example.TicketSeller.Dto.AirportResponse;
 import com.example.TicketSeller.Entities.Airport;
 import com.example.TicketSeller.Services.AirportServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,8 +19,15 @@ public class AirportController {
     AirportServices airportServices;
 
     @PostMapping
-    public void addNewAirport(@RequestBody List<Airport> newAirports) {
-        airportServices.addAirport(newAirports);
+    public void addNewAirport(@RequestBody List<AirportRequest> newAirports) {
+        List<Airport> airportList = new ArrayList<>();
+
+        for (AirportRequest airportRequest : newAirports) {
+            Airport airport = airportServices.convertRequestToEntity(airportRequest);
+            airportList.add(airport);
+        }
+        airportServices.addAirport(airportList);
+
     }
 
     @GetMapping("/{id}")
@@ -26,13 +36,19 @@ public class AirportController {
     }
 
     @GetMapping("/findByName/{airportName}")
-    public Airport findAirportByAirportName(@PathVariable String airportName) {
+    public AirportResponse findAirportByAirportName(@PathVariable String airportName) {
         return airportServices.findAirportByAirportName(airportName);
     }
 
     @GetMapping("/searchByName/{airportName}")
-    public List<Airport> searchAirportByAirportName(@PathVariable String airportName){
-        return  airportServices.searchAirportsByAirportName(airportName);
+    public List<AirportResponse> searchAirportByAirportName(@PathVariable String airportName) {
+        List<AirportResponse> airportResponses = new ArrayList<>();
+        List<Airport> airports = airportServices.searchAirportsByAirportName(airportName);
+        for (Airport airport : airports) {
+            airportResponses.add(airportServices.convertEntityToResponse(airport));
+        }
+
+        return airportResponses;
     }
 
 }

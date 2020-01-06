@@ -16,13 +16,13 @@ import java.util.List;
 @UniqueConstraint(columnNames = {"companyName"}))
 @NoArgsConstructor
 @AllArgsConstructor
-public class Company implements Serializable {
+public class Company extends BaseEntity implements Serializable {
 
     // uçuş tanımlanabilecek,aranabilecek
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "company_generator")
-    @SequenceGenerator(name = "company_generator", sequenceName = "company_seq" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_generator")
+    @SequenceGenerator(name = "company_generator", sequenceName = "company_seq", allocationSize = 1)
     @Column(name = "company_id")
     private int id;
 
@@ -30,7 +30,7 @@ public class Company implements Serializable {
     private String companyName;
 
     @OneToMany
-    @JoinColumn(name = "company_id" , referencedColumnName = "company_id")
+    @JoinColumn(name = "company_id", referencedColumnName = "company_id")
     private List<Flight> flights = new ArrayList<>();
 
 /*    @OneToMany

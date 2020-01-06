@@ -1,5 +1,6 @@
 package com.example.TicketSeller.Controllers;
 
+import com.example.TicketSeller.Dto.FlightRequest;
 import com.example.TicketSeller.Entities.Flight;
 import com.example.TicketSeller.Services.FlightServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class FlightController {
     FlightServices flightServices;
 
     @PostMapping
-    public void addNewFlight(@RequestBody Flight flight){
-        flightServices.addNewFlight(flight);
+    public void addNewFlight(@RequestBody FlightRequest flightRequest) {
+        flightServices.addNewFlight(flightRequest);
     }
 }

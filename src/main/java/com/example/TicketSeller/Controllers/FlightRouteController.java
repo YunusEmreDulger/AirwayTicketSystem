@@ -1,5 +1,7 @@
 package com.example.TicketSeller.Controllers;
 
+import com.example.TicketSeller.Dto.FlightRouteRequest;
+import com.example.TicketSeller.Dto.FlightRouteResponse;
 import com.example.TicketSeller.Entities.FlightRoute;
 import com.example.TicketSeller.Services.FlightRouteServices;
 import oracle.jdbc.proxy.annotation.Post;
@@ -15,8 +17,8 @@ public class FlightRouteController {
     FlightRouteServices flightRouteServices;
 
     @PostMapping
-    public void addNewFlightRoute(@RequestBody FlightRoute flightRoute) {
-        flightRouteServices.addFlightRoute(flightRoute);
+    public void addNewFlightRoute(@RequestBody FlightRouteRequest flightRouteRequest) {
+        flightRouteServices.addFlightRoute(flightRouteRequest);
     }
 
     @GetMapping("/{id}")
@@ -25,8 +27,9 @@ public class FlightRouteController {
     }
 
     @GetMapping("/findByFlightRouteCode/{flightRouteCode}")
-    public FlightRoute findFlightRouteByFlightRouteCode(@PathVariable String flightRouteCode){
-        return  flightRouteServices.findFlightRouteByFlightRouteCode(flightRouteCode);
+    public FlightRouteResponse findFlightRouteByFlightRouteCode(@PathVariable String flightRouteCode) {
+        flightRouteCode = flightRouteCode.toUpperCase();
+        return flightRouteServices.findFlightRouteByFlightRouteCode(flightRouteCode);
     }
 }
 

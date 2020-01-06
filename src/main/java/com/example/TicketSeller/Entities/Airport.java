@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -15,19 +13,17 @@ import java.util.List;
 @UniqueConstraint(columnNames = {"airportName"}))
 @NoArgsConstructor
 @AllArgsConstructor
-public class Airport implements Serializable {
+public class Airport extends BaseEntity implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "airport_generator")
-    @SequenceGenerator(name = "airport_generator", sequenceName = "airport_seq" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "airport_generator")
+    @SequenceGenerator(name = "airport_generator", sequenceName = "airport_seq", allocationSize = 1)
     @Column(name = "airport_id")
     private int id;
 
     @Column(name = "airportName")
     private String airportName;
-
-
 
 
 }

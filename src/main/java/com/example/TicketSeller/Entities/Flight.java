@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -16,7 +14,7 @@ import java.util.List;
 @UniqueConstraint(columnNames = {"flightCode"}))
 @NoArgsConstructor
 @AllArgsConstructor
-public class Flight implements Serializable, FlightInterface {
+public class Flight extends BaseEntity implements Serializable {
 
 
     @Id
@@ -43,8 +41,6 @@ public class Flight implements Serializable, FlightInterface {
     private FlightRoute flightRoute;
 
 
-
-    @Override
     public double computeOccupancy(int numberOfSales, int quota) {
         return Double.valueOf(numberOfSales) / Double.valueOf(quota);
     }

@@ -1,10 +1,16 @@
 package com.example.TicketSeller.Controllers;
 
+import com.example.TicketSeller.Dto.CompanyRequest;
+import com.example.TicketSeller.Dto.CompanyResponse;
+import com.example.TicketSeller.Dto.FlightResponse;
 import com.example.TicketSeller.Entities.Company;
 import com.example.TicketSeller.Entities.Flight;
 import com.example.TicketSeller.Services.CompanyServices;
+import com.example.TicketSeller.Services.FlightServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/company")
@@ -14,8 +20,12 @@ public class CompanyController {
     @Autowired
     CompanyServices companyServices;
 
+    @Autowired
+    FlightServices flightServices;
+
     @PostMapping
-    public void addNewCompany(@RequestBody Company company) {
+    public void addNewCompany(@RequestBody CompanyRequest company) {
+
         this.companyServices.addCompany(company);
     }
 
@@ -25,20 +35,35 @@ public class CompanyController {
     }
 
     @GetMapping("/findByName/{companyName}")
-    public Company findCompanyByName(@PathVariable String companyName) {
+    public CompanyResponse findCompanyByName(@PathVariable String companyName) {
         return companyServices.findCompanyByName(companyName);
     }
 
-    @PutMapping("/{companyId}/{flightId}")
-    public void addNewFlightToCompany(@PathVariable int companyId, @PathVariable int flightId) {
-        companyServices.addFlightToCompany(companyId, flightId);
+    @GetMapping("/searchByName/{companyName}")
+    public List<CompanyResponse> searchByCompanyName(@PathVariable String companyName) {
+        return companyServices.searchCompanyByName(companyName);
     }
 
-    @GetMapping("/findFlightOfCompany/{companyId}/{flightId}")
-    public Flight findFlightOfCompany(@PathVariable int companyId, @PathVariable int flightId) {
-        if (companyServices.findFlightOfCompanyByFlightId(companyId, flightId) != null) {
-            Flight flight = companyServices.findFlightOfCompanyByFlightId(companyId, flightId);
-            return flight;
+/*    @PutMapping("/{companyId}/{flightId}")
+    public void addNewFlightToCompany(@PathVariable int companyId, @PathVariable int flightId) {
+        companyServices.addFlightToCompany(companyId, flightId);
+    }*/
+
+    @PutMapping("/{companyName}/{flightCode}")
+    public void addNewFlightToCompany(@PathVariable String companyName, @PathVariable String flightCode) {
+        companyName = companyName.toLowerCase();
+        flightCode = flightCode.toUpperCase();
+        companyServices.addFlightToCompany(companyName, flightCode);
+    }
+
+    @GetMapping("/findFlightOfCompany/{companyName}/{flightCode}")
+    public FlightResponse findFlightOfCompany(@PathVariable String companyName, @PathVariable String flightCode) {
+        companyName = companyName.toLowerCase();
+        flightCode = flightCode.toUpperCase();
+        if (companyServices.findFlightOfCompanyByFlightCode(companyName, flightCode) != null) {
+            FlightResponse flightResponse = flightServices.convertEntityToResponse(companyServices.findFlightOfCompanyByFlightCode(companyName, flightCode));
+
+            return flightResponse;
         } else
             return null;
     }
