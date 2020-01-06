@@ -178,8 +178,10 @@ public class TicketServices implements TicketInterface {
             return price / 1.1;
         } else if (occupancyTemp > 0.1 && occupancy <= 0.1) {
             return price / 1.1;
-        }
-        return price;
+        } else if (occupancyTemp > 0.0 && occupancy <= 0.0) {
+            return price / 1.1;
+        } else
+            return price;
     }
 
 
