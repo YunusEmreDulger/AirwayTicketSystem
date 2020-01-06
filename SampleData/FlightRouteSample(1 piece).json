@@ -1,0 +1,9 @@
+{
+	"flightRouteCode" : "AA1",
+	"startPoint" : {
+		"id" : 1
+	},
+	"endPoint" : {
+		"id" : 2
+	}
+}

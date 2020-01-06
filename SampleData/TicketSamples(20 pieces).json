@@ -1,0 +1,181 @@
+[
+{
+	"ticketNo" : "TN1",
+	"price" : 89.99,
+	"seatNumber" : "1A",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+},
+{
+	"ticketNo" : "TN2",
+	"price" : 89.99,
+	"seatNumber" : "1B",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN3",
+	"price" : 89.99,
+	"seatNumber" : "1C",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN4",
+	"price" : 89.99,
+	"seatNumber" : "1D",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN5",
+	"price" : 89.99,
+	"seatNumber" : "1E",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN6",
+	"price" : 89.99,
+	"seatNumber" : "2A",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN7",
+	"price" : 89.99,
+	"seatNumber" : "2B",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN8",
+	"price" : 89.99,
+	"seatNumber" : "2C",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN9",
+	"price" : 89.99,
+	"seatNumber" : "2D",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN10",
+	"price" : 89.99,
+	"seatNumber" : "2E",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN11",
+	"price" : 89.99,
+	"seatNumber" : "3A",
+	"isSold" : false,
+	"flight" : {
+	"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN12",
+	"price" : 89.99,
+	"seatNumber" : "3B",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN13",
+	"price" : 89.99,
+	"seatNumber" : "3C",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN14",
+	"price" : 89.99,
+	"seatNumber" : "3D",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN15",
+	"price" : 89.99,
+	"seatNumber" : "3E",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN16",
+	"price" : 89.99,
+	"seatNumber" : "4A",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN17",
+	"price" : 89.99,
+	"seatNumber" : "4B",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN18",
+	"price" : 89.99,
+	"seatNumber" : "4C",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN19",
+	"price" : 89.99,
+	"seatNumber" : "4D",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+},
+{
+	"ticketNo" : "TN20",
+	"price" : 89.99,
+	"seatNumber" : "4E",
+	"isSold" : false,
+	"flight" : {
+		"flightCode" : "FC1"
+	}
+}
+]
