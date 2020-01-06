@@ -1,6 +1,7 @@
 {
 	"flightCode" : "FC1",
 	"quota" : 20,
-	"numberOfSales" : 0,
-	"occupancy" : 0
+	"flightRoute" : {
+		"flightRouteCode" : "AA1"
+	}
 }

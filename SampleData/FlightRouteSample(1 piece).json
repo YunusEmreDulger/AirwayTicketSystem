@@ -1,9 +1,10 @@
 {
 	"flightRouteCode" : "AA1",
 	"startPoint" : {
-		"id" : 1
+		"airportName" :"istanbulairport"
 	},
 	"endPoint" : {
-		"id" : 2
+		"airportName" : "ankaraairport"
 	}
+	
 }
