@@ -4,10 +4,11 @@ import com.example.TicketSeller.Dto.CompanyRequest;
 import com.example.TicketSeller.Dto.CompanyResponse;
 import com.example.TicketSeller.Dto.FlightResponse;
 import com.example.TicketSeller.Entities.Company;
-import com.example.TicketSeller.Entities.Flight;
 import com.example.TicketSeller.Services.CompanyServices;
 import com.example.TicketSeller.Services.FlightServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,9 @@ public class CompanyController {
     @Autowired
     FlightServices flightServices;
 
+
     @PostMapping
+    @CachePut(value = "companies" , key = "#companyName")
     public void addNewCompany(@RequestBody CompanyRequest company) {
 
         this.companyServices.addCompany(company);
@@ -35,11 +38,13 @@ public class CompanyController {
     }
 
     @GetMapping("/findByName/{companyName}")
+    @Cacheable(value = "companies" , key = "#companyName")
     public CompanyResponse findCompanyByName(@PathVariable String companyName) {
         return companyServices.findCompanyByName(companyName);
     }
 
     @GetMapping("/searchByName/{companyName}")
+    @Cacheable(value = "companies" , key = "#companyName")
     public List<CompanyResponse> searchByCompanyName(@PathVariable String companyName) {
         return companyServices.searchCompanyByName(companyName);
     }

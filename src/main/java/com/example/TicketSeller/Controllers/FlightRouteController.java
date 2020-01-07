@@ -4,7 +4,6 @@ import com.example.TicketSeller.Dto.FlightRouteRequest;
 import com.example.TicketSeller.Dto.FlightRouteResponse;
 import com.example.TicketSeller.Entities.FlightRoute;
 import com.example.TicketSeller.Services.FlightRouteServices;
-import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

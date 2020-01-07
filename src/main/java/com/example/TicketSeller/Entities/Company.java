@@ -29,7 +29,7 @@ public class Company extends BaseEntity implements Serializable {
     @Column(name = "companyName")
     private String companyName;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "company_id")
     private List<Flight> flights = new ArrayList<>();
 
