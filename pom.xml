@@ -11,7 +11,7 @@
     <groupId>com.yunusemre.ticketseller</groupId>
     <artifactId>ticketseller</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ticketseller</name>
+    <name>ticketSeller</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -71,6 +71,12 @@
             <version>1.5.3.RELEASE</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>2.3.0</version>
+        </dependency>
 
     </dependencies>
 

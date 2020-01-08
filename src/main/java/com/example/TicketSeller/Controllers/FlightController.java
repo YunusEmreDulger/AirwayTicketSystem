@@ -1,9 +1,7 @@
 package com.example.TicketSeller.Controllers;
 
 import com.example.TicketSeller.Dto.FlightRequest;
-import com.example.TicketSeller.Entities.Flight;
-import com.example.TicketSeller.Services.FlightServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.TicketSeller.Services.ServicesImpl.FlightServicesImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,11 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class FlightController {
 
-    @Autowired
-    FlightServices flightServices;
+    private final FlightServicesImpl flightServicesImpl;
+
+    public FlightController(FlightServicesImpl flightServicesImpl) {
+        this.flightServicesImpl = flightServicesImpl;
+    }
 
     @PostMapping
     public void addNewFlight(@RequestBody FlightRequest flightRequest) {
-        flightServices.addNewFlight(flightRequest);
+        flightServicesImpl.addNewFlight(flightRequest);
     }
 }

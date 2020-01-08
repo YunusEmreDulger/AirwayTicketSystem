@@ -3,8 +3,8 @@ package com.example.TicketSeller.Controllers;
 import com.example.TicketSeller.Dto.FlightRouteRequest;
 import com.example.TicketSeller.Dto.FlightRouteResponse;
 import com.example.TicketSeller.Entities.FlightRoute;
-import com.example.TicketSeller.Services.FlightRouteServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.TicketSeller.Services.ServicesImpl.FlightRouteServicesImpl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,23 +12,27 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class FlightRouteController {
 
-    @Autowired
-    FlightRouteServices flightRouteServices;
+
+    private final FlightRouteServicesImpl flightRouteServicesImpl;
+
+    public FlightRouteController(FlightRouteServicesImpl flightRouteServicesImpl) {
+        this.flightRouteServicesImpl = flightRouteServicesImpl;
+    }
 
     @PostMapping
     public void addNewFlightRoute(@RequestBody FlightRouteRequest flightRouteRequest) {
-        flightRouteServices.addFlightRoute(flightRouteRequest);
+        flightRouteServicesImpl.addFlightRoute(flightRouteRequest);
     }
 
     @GetMapping("/{id}")
     public FlightRoute findFlightRouteById(@PathVariable int id) {
-        return flightRouteServices.findFlightRouteById(id);
+        return flightRouteServicesImpl.findFlightRouteById(id);
     }
 
     @GetMapping("/findByFlightRouteCode/{flightRouteCode}")
-    public FlightRouteResponse findFlightRouteByFlightRouteCode(@PathVariable String flightRouteCode) {
+    public ResponseEntity<FlightRouteResponse> findFlightRouteByFlightRouteCode(@PathVariable String flightRouteCode) {
         flightRouteCode = flightRouteCode.toUpperCase();
-        return flightRouteServices.findFlightRouteByFlightRouteCode(flightRouteCode);
+        return ResponseEntity.ok(flightRouteServicesImpl.findFlightRouteByFlightRouteCode(flightRouteCode));
     }
 }
 

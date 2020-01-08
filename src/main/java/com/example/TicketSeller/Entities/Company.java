@@ -27,7 +27,7 @@ public class Company extends BaseEntity implements Serializable {
     private int id;
 
     @Column(name = "companyName")
-    private String companyName;
+    private String companyName;F
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "company_id")

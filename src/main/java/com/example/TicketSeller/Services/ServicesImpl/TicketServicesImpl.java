@@ -1,39 +1,47 @@
-package com.example.TicketSeller.Services;
+package com.example.TicketSeller.Services.ServicesImpl;
 
 import com.example.TicketSeller.Dto.TicketRequest;
 import com.example.TicketSeller.Dto.TicketResponse;
 import com.example.TicketSeller.Entities.Flight;
 import com.example.TicketSeller.Entities.Ticket;
-import com.example.TicketSeller.EntityInterfaces.TicketInterface;
 import com.example.TicketSeller.Repositories.FlightRepo;
 import com.example.TicketSeller.Repositories.TicketRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.TicketSeller.Services.TicketService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TicketServices implements TicketInterface {
+public class TicketServicesImpl implements TicketService {
 
-    @Autowired
-    TicketRepo ticketRepo;
+    private final TicketRepo ticketRepo;
+    private final FlightRepo flightRepo;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    FlightRepo flightRepo;
+    public TicketServicesImpl(TicketRepo ticketRepo, FlightRepo flightRepo, ModelMapper modelMapper) {
+        this.ticketRepo = ticketRepo;
+        this.flightRepo = flightRepo;
+        this.modelMapper = modelMapper;
+    }
 
+    @Override
     public void addTicket(List<TicketRequest> ticketRequests) {
         for (TicketRequest ticketRequest : ticketRequests) {
-            Ticket ticket = convertRequestToEntity(ticketRequest);
+            ticketRequest.setFlight(flightRepo.findFlightByFlightCode(ticketRequest.getFlight().getFlightCode()));
+            Ticket ticket = modelMapper.map(ticketRequest, Ticket.class);
             ticketRepo.save(ticket);
         }
     }
 
+    @Override
     public TicketResponse findTicketByTicketNo(String ticketNo) {
-        return convertEntityToResponse(ticketRepo.findTicketByTicketNo(ticketNo));
+        Ticket ticket = ticketRepo.findTicketByTicketNo(ticketNo);
+        return modelMapper.map(ticket, TicketResponse.class);
     }
 
-
+    @Override
     public List<TicketResponse> getAllTicketResponsesOfFlight(String flightCode) {
         Flight flight = flightRepo.findFlightByFlightCode(flightCode);
         int flightId = flight.getId();
@@ -42,12 +50,13 @@ public class TicketServices implements TicketInterface {
         List<TicketResponse> ticketResponses = new ArrayList<>();
 
         for (Ticket ticket : ticketList) {
-            ticketResponses.add(convertEntityToResponse(ticket));
+            ticketResponses.add(modelMapper.map(ticket, TicketResponse.class));
         }
 
         return ticketResponses;
     }
 
+    @Override
     public List<Ticket> getAllTicketsOfFlight(String flightCode) {
         Flight flight = flightRepo.findFlightByFlightCode(flightCode);
         int flightId = flight.getId();
@@ -55,6 +64,7 @@ public class TicketServices implements TicketInterface {
         return ticketRepo.findTicketsByFlight_IdOrderByTicketNo(flightId);
     }
 
+    @Override
     public void buyTicket(String ticketNo) {
         Ticket ticket = ticketRepo.findTicketByTicketNo(ticketNo);
         ticket.setSold(true);
@@ -94,6 +104,7 @@ public class TicketServices implements TicketInterface {
 
     }
 
+    @Override
     public void cancelTicket(String ticketNo) {
         Ticket ticket = ticketRepo.findTicketByTicketNo(ticketNo);
         ticket.setSold(false);
@@ -133,6 +144,7 @@ public class TicketServices implements TicketInterface {
 
     }
 
+    @Override
     public double checkOccupancyAndIncrementPrice(double occupancy, double occupancyTemp, double price) {
         if (0 <= occupancyTemp && occupancyTemp < 0.1 && occupancy >= 0.1) {
             return price * 1.1;
@@ -158,6 +170,7 @@ public class TicketServices implements TicketInterface {
             return price;
     }
 
+    @Override
     public double checkOccupancyAndDecrementPrice(double occupancy, double occupancyTemp, double price) {
 
         if (occupancyTemp > 0.9 && occupancy <= 0.9) {
@@ -182,30 +195,5 @@ public class TicketServices implements TicketInterface {
             return price / 1.1;
         } else
             return price;
-    }
-
-
-    @Override
-    public Ticket convertRequestToEntity(TicketRequest ticketRequest) {
-        Ticket ticket = new Ticket();
-        ticket.setTicketNo(ticketRequest.getTicketNo());
-        ticket.setPrice(ticketRequest.getPrice());
-        ticket.setSeatNumber(ticketRequest.getSeatNumber());
-        ticket.setFlight(ticketRequest.getFlight());
-
-        return ticket;
-    }
-
-    @Override
-    public TicketResponse convertEntityToResponse(Ticket ticket) {
-        TicketResponse ticketResponse = new TicketResponse();
-        ticketResponse.setTicketNo(ticket.getTicketNo());
-        ticketResponse.setPrice(ticket.getPrice());
-        ticketResponse.setSeatNumber(ticket.getSeatNumber());
-        ticketResponse.setSold(ticket.isSold());
-        ticketResponse.setFlight(ticket.getFlight());
-        ticketResponse.setCreationDate(ticket.getCreationDate());
-
-        return ticketResponse;
     }
 }

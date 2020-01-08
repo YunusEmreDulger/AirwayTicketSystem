@@ -1,6 +1,5 @@
 package com.example.TicketSeller.Entities;
 
-import com.example.TicketSeller.EntityInterfaces.FlightInterface;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
